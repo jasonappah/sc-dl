@@ -1,4 +1,6 @@
 import soundcloud, b2sdk, os
+from dotenv import load_dotenv
+load_dotenv()
 
 client = soundcloud.Client(
     client_id=os.environ["sc_client_id"],
@@ -29,7 +31,7 @@ def getUserLikes(userId):
             href = False
     for i in arr:
         if (i.streamable):
-            final.append({"song": i.title, "id": i.id, "artist": i.user["username"], "artist_id": i.user["id"]})
+            final.append({"song": i.title, "id": i.id, "artist": i.user["username"], "artist_id": i.user["id"], "streamable": i.streamable, "stream_url": i.stream_url if i.streamable else ""})
     return final
 
 def getDlLink(trackId):
